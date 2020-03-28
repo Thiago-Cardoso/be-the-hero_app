@@ -26,7 +26,7 @@
 
 ## Web
 
-![](https://github.com/Thiago-Cardoso/be-the-hero_app/tree/master/frontend/src/assets/web.gif)
+![](https://github.com/Thiago-Cardoso/be-the-hero_app/blob/master/frontend/src/assets/web.gif)
 
 ## Stack the Project
 
