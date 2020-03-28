@@ -1,6 +1,6 @@
 import React from 'react';
 import {Feather } from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { View, Image, Text , TouchableOpacity , Linking } from 'react-native';
 import * as MailComposer from 'expo-mail-composer'
 
@@ -10,7 +10,14 @@ import styles from './styles';
 
 export default function Detail() {
 const navigation = useNavigation();
-const message = 'Hello APD, Im getting in touch because I would like to help';
+const route = useRoute();
+
+const incident = route.params.incident;
+const message = `Hello ${incident.name}, Im getting in touch because I would like to help "${incident.title}" with value 
+of ${Intl.NumberFormat('pt-BR',
+{style: 'currency' ,
+ currency: 'BRL'
+ }).format(incident.value)}`;
 
   function navigateBack(){
     navigation.goBack()
@@ -18,14 +25,14 @@ const message = 'Hello APD, Im getting in touch because I would like to help';
 
   function sendMail(){
     MailComposer.composeAsync({
-      subject: 'hero of the case',
-      recipients: ['thiagocardosooti@gmail.com'],
+      subject: `hero of the case: ${incident.title}`,
+      recipients: [incident.email],
       body: message,
     })
   }
 
   function sendWhatsApp(){
-    Linking.openURL(`whatsapp://send?phone=98140892;text=${message}`);
+    Linking.openURL(`whatsapp://send?phone=${incident.whatsapp}&text=${message}`);
   }
 
   return (
@@ -37,14 +44,19 @@ const message = 'Hello APD, Im getting in touch because I would like to help';
             </TouchableOpacity>
         </View>
         <View style={styles.incident}>
-            <Text style={[styles.incidentProperty, {marginTop: 0}]}>ONG</Text>
-            <Text style={styles.incidentValue}>APD</Text>
+            <Text style={[styles.incidentProperty, {marginTop: 0}]}>ONG:</Text>
+            <Text style={styles.incidentValue}>{incident.name} of {incident.city}/{incident.uf}</Text>
 
-            <Text style={styles.incidentProperty}>ONG</Text>
-            <Text style={styles.incidentValue}>APD</Text>
+            <Text style={styles.incidentProperty}>CASE:</Text>
+            <Text style={styles.incidentValue}>{incident.title}</Text>
 
-            <Text style={styles.incidentProperty}>ONG</Text>
-            <Text style={styles.incidentValue}>APD</Text>
+            <Text style={styles.incidentProperty}>VALUE:</Text>
+            <Text style={styles.incidentValue}>
+              {Intl.NumberFormat('pt-BR',
+               {style: 'currency' ,
+                currency: 'BRL'
+                }).format(incident.value)}
+            </Text>
         </View>
         <View style={styles.contactBox}>
             <Text style={styles.heroTitle}>Save the Day!</Text>
