@@ -28,6 +28,11 @@
 
 ![](https://github.com/Thiago-Cardoso/be-the-hero_app/blob/master/frontend/src/assets/web.gif)
 
+
+## Mobile
+
+![](https://github.com/Thiago-Cardoso/be-the-hero_app/blob/master/mobile/assets/web-mobile.gif)
+
 ## Stack the Project
 
 - **Node**
