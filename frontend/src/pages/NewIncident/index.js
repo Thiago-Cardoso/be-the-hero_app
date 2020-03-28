@@ -32,7 +32,7 @@ export default function NewIncident() {
           }
        })
 
-       // history.push('/profile');
+        history.push('/profile');
 
       }catch(err){
 
